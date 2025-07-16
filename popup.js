@@ -2,6 +2,7 @@ console.log('EXH Downloader popup loaded');
 
 document.addEventListener('DOMContentLoaded', function() {
   const downloadBestBtn = document.getElementById('downloadBest');
+  const settingsBtn = document.getElementById('settingsBtn');
   const statusDiv = document.getElementById('status');
   const resultsDiv = document.getElementById('results');
 
@@ -224,6 +225,18 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         updateStatus(`Error: ${response.error}`);
       }
+    });
+  });
+
+  // Handle settings button click
+  settingsBtn.addEventListener('click', function() {
+    // Open settings page in a new window
+    chrome.windows.create({
+      url: chrome.runtime.getURL('settings.html'),
+      type: 'popup',
+      width: 540,
+      height: 460,
+      focused: true
     });
   });
 

@@ -3,7 +3,7 @@
   "description": "Extract torrent links from exhentai.org gallery pages",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["tabs", "scripting", "downloads"],
+  "permissions": ["tabs", "scripting", "downloads", "windows"],
   "host_permissions": ["https://exhentai.org/*"],
   "action": {
     "default_popup": "hello.html",
