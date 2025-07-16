@@ -1,4 +1,4 @@
-console.log('EXH Downloader popup loaded');
+console.log('EXDownloader popup loaded');
 
 document.addEventListener('DOMContentLoaded', function() {
   const downloadBestBtn = document.getElementById('downloadBest');

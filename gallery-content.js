@@ -1,5 +1,5 @@
-// Content script for EXH Downloader - Gallery page functionality
-console.log('EXH Downloader gallery content script loaded on:', window.location.href);
+// Content script for EXDownloader - Gallery page functionality
+console.log('EXDownloader gallery content script loaded on:', window.location.href);
 
 // Function to extract gallery title
 function extractGalleryTitle() {

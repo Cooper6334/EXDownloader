@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a basic Chrome Extension project called "Hello Extensions" that demonstrates the fundamentals of Chrome extension development. The project follows Chrome Extension Manifest V3 format and serves as a simple "Hello World" example for learning extension development.
+This is a Chrome Extension project called "EXDownloader" that automatically detects and downloads the best torrent files from ExHentai gallery pages. The project follows Chrome Extension Manifest V3 format and provides intelligent torrent detection, duplicate prevention, and batch download management.
 
 ## Project Structure
 

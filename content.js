@@ -1,5 +1,5 @@
-// Content script for EXH Downloader
-console.log('EXH Downloader content script loaded on:', window.location.href);
+// Content script for EXDownloader
+console.log('EXDownloader content script loaded on:', window.location.href);
 
 // Function to extract torrent data with Downloads info
 function extractTorrentLinks() {

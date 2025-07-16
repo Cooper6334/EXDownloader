@@ -1,5 +1,5 @@
-// Background script for EXH Downloader
-console.log('EXH Downloader background script loaded');
+// Background script for EXDownloader
+console.log('EXDownloader background script loaded');
 
 // Function to find torrent links in all matching tabs
 async function findTorrentLinksInAllTabs() {

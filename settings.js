@@ -1,4 +1,4 @@
-console.log('EXH Downloader settings page loaded');
+console.log('EXDownloader settings page loaded');
 
 document.addEventListener('DOMContentLoaded', function() {
   const backBtn = document.getElementById('backBtn');

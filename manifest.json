@@ -1,5 +1,5 @@
 {
-  "name": "EXH Downloader",
+  "name": "EXDownloader",
   "description": "Extract torrent links from exhentai.org gallery pages",
   "version": "1.0",
   "manifest_version": 3,

@@ -1,5 +1,5 @@
-// Content script for EXH Downloader - Search page functionality
-console.log('EXH Downloader search content script loaded on:', window.location.href);
+// Content script for EXDownloader - Search page functionality
+console.log('EXDownloader search content script loaded on:', window.location.href);
 
 // Function to modify torrent button width
 function modifyTorrentButtons() {
@@ -66,7 +66,7 @@ function initializeButtonModification() {
       subtree: true
     });
     
-    console.log('EXH Downloader: Torrent button width modification initialized');
+    console.log('EXDownloader: Torrent button width modification initialized');
   }
 }
 
