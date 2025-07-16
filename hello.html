@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <style>
+      body {
+        width: 300px;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+      }
+      .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 100%;
+      }
+      .button:hover {
+        background-color: #45a049;
+      }
+      .button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+      #results {
+        margin-top: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .result-item {
+        border: 1px solid #ddd;
+        margin: 5px 0;
+        padding: 8px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+      .tab-info {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .torrent-link {
+        font-size: 12px;
+        word-break: break-all;
+        margin: 2px 0;
+        padding: 3px;
+        background-color: #e8f4f8;
+        border-radius: 3px;
+      }
+      .download-btn {
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        padding: 3px 8px;
+        font-size: 11px;
+        cursor: pointer;
+        border-radius: 3px;
+        margin-left: 5px;
+      }
+      .status {
+        font-size: 12px;
+        color: #666;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>EXH Downloader</h2>
+    <button id="downloadBest" class="button">Download Best Torrents</button>
+    <div id="status" class="status"></div>
+    <div id="results"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
