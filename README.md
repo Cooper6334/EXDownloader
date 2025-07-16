@@ -20,14 +20,14 @@ EX Downloader is a Chrome extension specifically designed for ExHentai website, 
 
 ### 安裝方法
 
-1. 下載或克隆此倉庫
+1. 請到 https://github.com/Cooper6334/EXDownloader/releases 下載並解壓縮
 2. 打開 Chrome 瀏覽器，導航到 `chrome://extensions/`
 3. 啟用右上角的「開發人員模式」
 4. 點擊「載入未封裝項目」並選擇包含此擴展的資料夾
 5. 擴展將出現在您的擴展列表中
    
 ### Installation
-1. Download or clone this repository
+1. Please go to https://github.com/Cooper6334/EXDownloader/releases to download and extract
 2. Open Chrome browser and navigate to `chrome://extensions/`
 3. Enable "Developer mode" in the top right corner
 4. Click "Load unpacked" and select the folder containing this extension
