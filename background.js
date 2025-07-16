@@ -229,6 +229,7 @@ async function findGalleryTorrentLinks() {
         if (result.result) {
           const galleryData = result.result;
           
+          // Always add gallery results to show status (whether they have torrents or not)
           if (!galleryData.hasTorrents) {
             // No torrents available - add to results to show the status
             results.push({
@@ -274,9 +275,30 @@ async function findGalleryTorrentLinks() {
               });
             }
           }
+        } else {
+          // If no result returned, still add the tab to show it was checked
+          results.push({
+            tabId: tab.id,
+            url: tab.url,
+            title: tab.title,
+            galleryTitle: tab.title || 'Unknown Gallery',
+            torrentStatus: '無法檢測種子狀態',
+            hasTorrents: false,
+            torrentLinks: []
+          });
         }
       } catch (error) {
         console.error(`Error processing gallery tab ${tab.id}:`, error);
+        // Add error result to show the tab was processed but failed
+        results.push({
+          tabId: tab.id,
+          url: tab.url,
+          title: tab.title,
+          galleryTitle: tab.title || 'Unknown Gallery',
+          torrentStatus: `檢測失敗: ${error.message}`,
+          hasTorrents: false,
+          torrentLinks: []
+        });
       }
     }
     

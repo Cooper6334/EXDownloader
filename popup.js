@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resultsDiv.innerHTML = '';
     
     if (results.length === 0) {
-      resultsDiv.innerHTML = '<div class="status">No matching tabs or torrent links found</div>';
+      resultsDiv.innerHTML = '<div class="status">No matching tabs found</div>';
       return;
     }
 
@@ -45,18 +45,20 @@ document.addEventListener('DOMContentLoaded', function() {
         resultItem.style.backgroundColor = '#ffe6e6';
         resultItem.style.border = '2px solid #ff9999';
         
+        const statusLabel = document.createElement('div');
+        statusLabel.style.fontWeight = 'bold';
+        statusLabel.style.color = '#cc0000';
+        statusLabel.style.fontSize = '12px';
+        statusLabel.style.marginBottom = '3px';
+        statusLabel.textContent = `[No Torrents] ${result.torrentStatus || '該漫畫沒有種子'}`;
+        resultItem.appendChild(statusLabel);
+        
         const tabInfo = document.createElement('div');
         tabInfo.className = 'tab-info';
-        tabInfo.textContent = `❌ ${result.galleryTitle || result.title || result.url}`;
+        tabInfo.textContent = result.galleryTitle || 'Unknown Gallery';
         tabInfo.style.color = '#cc0000';
+        tabInfo.style.fontWeight = 'bold';
         resultItem.appendChild(tabInfo);
-        
-        const statusDiv = document.createElement('div');
-        statusDiv.style.fontSize = '12px';
-        statusDiv.style.color = '#cc0000';
-        statusDiv.style.marginTop = '5px';
-        statusDiv.textContent = result.torrentStatus || '該漫畫沒有種子';
-        resultItem.appendChild(statusDiv);
         
         resultsDiv.appendChild(resultItem);
         return;
@@ -77,15 +79,32 @@ document.addEventListener('DOMContentLoaded', function() {
           resultItem.style.border = '2px solid #ffc107';
         }
         
+        // Add status label if downloaded or skipped
+        if (wasDownloaded || wasSkipped) {
+          const statusLabel = document.createElement('div');
+          statusLabel.style.fontWeight = 'bold';
+          statusLabel.style.fontSize = '12px';
+          statusLabel.style.marginBottom = '3px';
+          if (wasDownloaded) {
+            statusLabel.textContent = '[Downloaded]';
+            statusLabel.style.color = '#2e7d32';
+          } else if (wasSkipped) {
+            statusLabel.textContent = '[Skipped]';
+            statusLabel.style.color = '#856404';
+          }
+          resultItem.appendChild(statusLabel);
+        }
+        
         const tabInfo = document.createElement('div');
         tabInfo.className = 'tab-info';
+        tabInfo.textContent = result.galleryTitle || 'Unknown Gallery';
+        tabInfo.style.fontWeight = 'bold';
         if (wasDownloaded) {
-          tabInfo.textContent = `✓ Downloaded from: ${result.galleryTitle || result.title || result.url}`;
+          tabInfo.style.color = '#2e7d32';
         } else if (wasSkipped) {
-          tabInfo.textContent = `⚠ Skipped (duplicate) from: ${result.galleryTitle || result.title || result.url}`;
           tabInfo.style.color = '#856404';
         } else {
-          tabInfo.textContent = result.galleryTitle || result.title || result.url;
+          tabInfo.style.color = '#333';
         }
         resultItem.appendChild(tabInfo);
         
@@ -101,19 +120,26 @@ document.addEventListener('DOMContentLoaded', function() {
         infoDiv.textContent = infoText;
         resultItem.appendChild(infoDiv);
         
-        const linkText = document.createElement('div');
-        linkText.textContent = bestTorrent.text || bestTorrent.href;
-        linkText.style.fontWeight = 'bold';
-        linkText.style.color = wasDownloaded ? '#2e7d32' : '#856404';
-        resultItem.appendChild(linkText);
-        
         resultsDiv.appendChild(resultItem);
       }
     });
     
-    let statusMessage = `Downloaded: ${downloadStats.downloaded}, Skipped: ${downloadStats.skipped}`;
-    if (downloadStats.skipped > 0) {
-      statusMessage += ` (${downloadStats.skipped} duplicates avoided)`;
+    // Count galleries with no torrents
+    const noTorrentCount = results.filter(result => result.hasTorrents === false).length;
+    const totalTabs = results.length;
+    
+    let statusMessage = '';
+    if (downloadStats.downloaded > 0 || downloadStats.skipped > 0) {
+      statusMessage = `Downloaded: ${downloadStats.downloaded}, Skipped: ${downloadStats.skipped}`;
+      if (downloadStats.skipped > 0) {
+        statusMessage += ` (${downloadStats.skipped} duplicates avoided)`;
+      }
+    } else {
+      statusMessage = `Found ${totalTabs} tab(s)`;
+    }
+    
+    if (noTorrentCount > 0) {
+      statusMessage += `, No torrents: ${noTorrentCount}`;
     }
     updateStatus(statusMessage);
   }
@@ -189,10 +215,11 @@ document.addEventListener('DOMContentLoaded', function() {
           skipped: skipCount
         };
         
-        if (downloadCount > 0 || skipCount > 0) {
+        // Always display results if we have any tabs (including no-torrent galleries)
+        if (response.results.length > 0) {
           displayResults(response.results, downloadStats);
         } else {
-          updateStatus('No torrent links found in matching tabs');
+          updateStatus('No matching tabs found');
         }
       } else {
         updateStatus(`Error: ${response.error}`);
